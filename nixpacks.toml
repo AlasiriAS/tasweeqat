@@ -3,3 +3,6 @@ cmds = ["rm -f package-lock.json && npm install --legacy-peer-deps"]
 
 [phases.build]
 cmds = ["npx prisma generate", "npm run build"]
+
+[start]
+cmd = "npm start"
