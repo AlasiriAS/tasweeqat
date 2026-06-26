@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── USERS & AUTH ────────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          String    @default("sales") // admin | manager | sales | developer | it | support
+  avatar        String?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  assignedLeads Lead[]      @relation("AssignedTo")
+  assignedCrms  CrmRecord[] @relation("AssignedCrm")
+  crmNotes      CrmNote[]
+  activities    Activity[]
+}
+
+// ─── LEADS ───────────────────────────────────────────────────────────────────
+
+model Lead {
+  id              String    @id @default(cuid())
+  // Business info
+  businessName    String
+  category        String?
+  city            String?
+  phone           String?
+  website         String?
+  websiteStatus   String    @default("no_website") // no_website | social_only | broken_website | has_website
+  rating          Float?
+  reviewCount     Int?
+  googleMapsUrl   String?
+  // Scoring
+  priorityScore   Int       @default(0)
+  priority        String    @default("low") // high | medium | low
+  presaleInfo     String?   // auto-generated pitch text
+  // Pipeline
+  pipelineStage   String?   // null = not in pipeline yet
+  // Relations
+  assignedTo      User?     @relation("AssignedTo", fields: [assignedToId], references: [id])
+  assignedToId    String?
+  crmRecord       CrmRecord?
+  activities      Activity[]
+  // Contact form submissions from website
+  contactSubmissions ContactSubmission[]
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+// ─── CRM ─────────────────────────────────────────────────────────────────────
+
+model CrmRecord {
+  id                String    @id @default(cuid())
+  lead              Lead      @relation(fields: [leadId], references: [id])
+  leadId            String    @unique
+  // Stage
+  stage             String    @default("contact") // contact | info_gathering | building | review | delivered | upsell
+  // Client details
+  contactPerson     String?
+  agreedPrice       Float     @default(2000)
+  pagesNeeded       String?   // JSON array string
+  requirements      String?
+  internalNotes     String?
+  // Upsell
+  upsellServices    String?   // JSON array of selected services
+  upsellNotes       String?
+  nextContactDate   DateTime?
+  // Hosting
+  hostingActive     Boolean   @default(false)
+  hostingRenewalDate DateTime?
+  monthlyFee        Float     @default(50)
+
+  assigned          User?     @relation("AssignedCrm", fields: [assignedId], references: [id])
+  assignedId        String?
+  notes             CrmNote[]
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model CrmNote {
+  id          String    @id @default(cuid())
+  crmRecord   CrmRecord @relation(fields: [crmRecordId], references: [id])
+  crmRecordId String
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  content     String
+  createdAt   DateTime  @default(now())
+}
+
+model Activity {
+  id          String    @id @default(cuid())
+  lead        Lead      @relation(fields: [leadId], references: [id])
+  leadId      String
+  user        User?     @relation(fields: [userId], references: [id])
+  userId      String?
+  type        String    // stage_change | note_added | call_made | email_sent | assigned
+  description String
+  metadata    String?   // JSON string for extra data
+  createdAt   DateTime  @default(now())
+}
+
+// ─── WEBSITE CONTACT FORM ────────────────────────────────────────────────────
+
+model ContactSubmission {
+  id          String    @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  message     String
+  service     String?   // website | hosting | social_media | crm | email
+  status      String    @default("new") // new | contacted | converted | closed
+  // Link to lead if converted
+  lead        Lead?     @relation(fields: [leadId], references: [id])
+  leadId      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// ─── SETTINGS ────────────────────────────────────────────────────────────────
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}

@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tasweeqat_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/prod.db
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+    volumes:
+      - app_data:/app/data
+    networks:
+      - tasweeqat_net
+
+  # n8n automation (optional — comment out if not needed)
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: tasweeqat_n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost:5678}
+      - DB_TYPE=sqlite
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - tasweeqat_net
+
+volumes:
+  app_data:
+  n8n_data:
+
+networks:
+  tasweeqat_net:
+    driver: bridge
