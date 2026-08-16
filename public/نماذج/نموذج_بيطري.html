@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيادة الرفق البيطرية — نموذج عرض · تسويقات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f766e;--teal2:#0b5c55;--amber:#f59e0b;--amber-l:#fbbf24;--mint:#e6f5f2;--cream:#fff8ee;--ink:#1f2d2a;--muted:#5c6b67;--line:#e3ece9}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Tajawal","Cairo",sans-serif;color:var(--ink);background:#fff;line-height:1.85}
+h1,h2,h3{font-family:"Cairo",sans-serif}
+.en{font-family:"Poppins",sans-serif}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:40px;font-weight:700;font-family:"Cairo";font-size:15px;cursor:pointer;transition:.2s;border:2px solid transparent}
+.btn-amber{background:var(--amber);color:#3d2900}.btn-amber:hover{background:var(--amber-l)}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:var(--teal2)}
+.btn-ol{border-color:#fff;color:#fff}.btn-ol:hover{background:#fff;color:var(--teal)}
+.wm-bar{background:#08403b;color:#fff;text-align:center;font:600 13px/2.6 "Cairo",sans-serif}
+.wm-bar a{color:var(--amber-l)}
+.wm{position:fixed;inset:-25%;z-index:9998;pointer-events:none;transform:rotate(-30deg);opacity:.05;display:flex;flex-direction:column;justify-content:center;gap:66px;font:900 30px "Cairo",sans-serif;white-space:nowrap;color:#0f766e}
+nav.bar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.bn{display:flex;align-items:center;gap:12px}
+.bn .mk{width:44px;height:44px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.bn .mk svg{width:24px;height:24px;fill:#fff}
+.bn b{font-size:20px;color:var(--teal)}.bn span{color:var(--amber);font-size:11px;display:block;font-weight:700}
+.bar ul{display:flex;gap:24px;list-style:none;font-family:"Cairo";font-weight:600;font-size:15px}
+.bar ul a{color:#2a3b37}.bar ul a:hover{color:var(--teal)}
+@media(max-width:840px){.bar ul{display:none}}
+.hero{background:radial-gradient(900px 400px at 85% -10%,rgba(245,158,11,.16),transparent 60%),linear-gradient(160deg,#e6f5f2,#f2faf8)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;padding:70px 22px 84px}
+.hero .kick{color:var(--amber);font-family:"Cairo";font-weight:700;letter-spacing:1px;margin-bottom:14px;display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid #f2e2c4;padding:6px 14px;border-radius:30px;font-size:14px}
+.hero h1{font-size:50px;line-height:1.25;color:var(--teal);margin-bottom:16px}
+.hero h1 .a{color:var(--amber)}
+.hero p{font-size:19px;color:#3f524d;max-width:520px;margin-bottom:28px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-art{background:linear-gradient(150deg,#0f766e,#0b5c55);border-radius:26px;padding:40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.hero-art .paw{width:150px;height:150px;margin:0 auto 12px;fill:rgba(255,255,255,.92)}
+.hero-art .big{font-family:"Cairo";font-weight:900;font-size:26px}
+.hero-art .sm{color:#bfe6e0}
+.hero-art .dot{position:absolute;border-radius:50%;background:rgba(245,158,11,.35)}
+.hero-art .d1{width:80px;height:80px;top:-20px;left:-20px}.hero-art .d2{width:50px;height:50px;bottom:20px;right:20px;background:rgba(255,255,255,.18)}
+.sec{padding:80px 0}.sec.mint{background:var(--mint)}.sec.cream{background:var(--cream)}
+.head{text-align:center;max-width:680px;margin:0 auto 44px}
+.head .k{color:var(--amber);font-family:"Cairo";font-weight:700;margin-bottom:8px}
+.head h2{font-size:34px;color:var(--teal)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;transition:.2s}
+.card:hover{border-color:var(--amber);transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(15,118,110,.5)}
+.card .ic{width:60px;height:60px;border-radius:16px;background:var(--mint);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.card .ic svg{width:30px;height:30px;stroke:var(--teal);fill:none;stroke-width:1.7}
+.card h3{color:var(--teal);font-size:20px;margin-bottom:7px}.card p{color:var(--muted);font-size:15.5px}
+.stats{background:var(--teal);color:#fff}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:52px 22px;text-align:center}
+.stats b{display:block;font-family:"Cairo";font-weight:900;font-size:42px;color:var(--amber-l)}
+.stats span{color:#bfe6e0}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about .box{background:linear-gradient(135deg,#f59e0b,#fbbf24);border-radius:22px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
+.about .box svg{width:150px;height:150px;fill:#fff;opacity:.92}
+.about h2{color:var(--teal);font-size:32px;margin-bottom:14px}.about p{color:var(--muted);margin-bottom:12px}
+.about li{list-style:none;display:flex;gap:10px;margin:9px 0;color:#2a3b37}
+.about li svg{width:22px;height:22px;stroke:var(--amber);fill:none;stroke-width:2.4;flex-shrink:0;margin-top:4px}
+.band{background:linear-gradient(120deg,var(--teal),var(--teal2));color:#fff;text-align:center}
+.band .wrap{padding:64px 22px}.band h2{font-size:32px;margin-bottom:10px}.band .a{color:var(--amber-l)}
+.band p{color:#bfe6e0;margin-bottom:24px}
+footer{background:#0a4a44;color:#a9d3cd;padding:50px 0 26px}
+footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.1)}
+footer h4{color:#fff;margin-bottom:12px}footer ul{list-style:none;display:grid;gap:7px;font-size:14.5px}
+footer .bottom{padding-top:18px;text-align:center;color:#78afa8;font-size:13px}
+@media(max-width:840px){.hero .wrap{grid-template-columns:1fr}.hero h1{font-size:38px}.grid{grid-template-columns:1fr}.stats .wrap{grid-template-columns:repeat(2,1fr)}.about .wrap,footer .top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wm-bar"><a href="../index.html">← هذا نموذج عرض من «تسويقات» — للاستعراض فقط · ارجع للموقع</a></div>
+<div class="wm" aria-hidden="true"></div>
+
+<nav class="bar"><div class="wrap">
+  <div class="bn"><div class="mk"><svg viewBox="0 0 24 24"><path d="M4.5 12.5a2 2 0 100-4 2 2 0 000 4zM19.5 12.5a2 2 0 100-4 2 2 0 000 4zM9 7a2 2 0 100-4 2 2 0 000 4zM15 7a2 2 0 100-4 2 2 0 000 4zM12 12c-3 0-5 2.5-5 5a3 3 0 003 3c1 0 1.3-.5 2-.5s1 .5 2 .5a3 3 0 003-3c0-2.5-2-5-5-5z"/></svg></div><div><b>عيادة الرفق</b><span>البيطرية · VET CARE</span></div></div>
+  <ul><li><a href="#serv">خدماتنا</a></li><li><a href="#about">من نحن</a></li><li><a href="#why">لماذا نحن</a></li><li><a href="#contact">تواصل</a></li></ul>
+  <a class="btn btn-amber" href="#contact">احجز موعد</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <span class="kick">🐾 رعاية بيطرية موثوقة</span>
+    <h1>رعاية بيطرية <span class="a">بحبّ</span> لأصدقائك المخلصين</h1>
+    <p>فريق بيطري متخصص وعيادة مجهّزة بأحدث الأجهزة، مع متجر مستلزمات وخدمة طوارئ — كل ما يحتاجه حيوانك الأليف في مكان واحد.</p>
+    <div class="cta"><a class="btn btn-teal" href="#contact">احجز موعدك الآن</a><a class="btn" style="border:2px solid var(--teal);color:var(--teal)" href="#serv">خدماتنا</a></div>
+  </div>
+  <div class="hero-art"><span class="dot d1"></span><span class="dot d2"></span>
+    <svg class="paw" viewBox="0 0 24 24"><path d="M4.5 12.5a2 2 0 100-4 2 2 0 000 4zM19.5 12.5a2 2 0 100-4 2 2 0 000 4zM9 7a2 2 0 100-4 2 2 0 000 4zM15 7a2 2 0 100-4 2 2 0 000 4zM12 12c-3 0-5 2.5-5 5a3 3 0 003 3c1 0 1.3-.5 2-.5s1 .5 2 .5a3 3 0 003-3c0-2.5-2-5-5-5z"/></svg>
+    <div class="big">صحّة وسعادة حيوانك أولويتنا</div>
+    <div class="sm">نفتح ٧ أيام في الأسبوع</div>
+  </div>
+</div></header>
+
+<section class="sec" id="serv"><div class="wrap">
+  <div class="head"><div class="k">خدماتنا</div><h2>كل ما يحتاجه حيوانك الأليف</h2></div>
+  <div class="grid">
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v6M9 6h6"/><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 14h.01M16 14h.01M10 17h4"/></svg></div><h3>كشف وتطعيم</h3><p>فحص شامل وبرامج تطعيم دورية تحمي حيوانك من الأمراض.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v8M8 6l4-4 4 4M6 22a6 6 0 0112 0"/></svg></div><h3>عمليات جراحية</h3><p>غرفة عمليات مجهّزة وفريق جراحي بخبرة لمختلف الحالات.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 4l3 3M4 10c0-3 3-6 8-6s8 3 8 8-3 8-8 8a6 6 0 01-6-6"/><circle cx="10" cy="12" r="1.5"/></svg></div><h3>تجميل وحلاقة</h3><p>استحمام وقص وتنظيف احترافي يبقي حيوانك أنيقاً ونظيفاً.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7zM9 7V5a3 3 0 016 0v2"/></svg></div><h3>متجر مستلزمات</h3><p>أطعمة وألعاب وإكسسوارات ومنتجات عناية بأفضل الماركات.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg></div><h3>طوارئ ٢٤/٧</h3><p>خط طوارئ واستقبال عاجل للحالات الحرجة على مدار الساعة.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11M9 20v-6h6v6"/></svg></div><h3>إقامة فندقية</h3><p>مكان آمن ومريح لإقامة حيوانك أثناء سفرك أو انشغالك.</p></div>
+  </div>
+</div></section>
+
+<section class="stats"><div class="wrap">
+  <div><b>+٨٠٠٠</b><span>حالة عولجت</span></div>
+  <div><b>+٥٠٠٠</b><span>عميل يثق بنا</span></div>
+  <div><b>٧/٢٤</b><span>خدمة طوارئ</span></div>
+  <div><b>١٠</b><span>سنوات خبرة</span></div>
+</div></section>
+
+<section class="sec mint about" id="about"><div class="wrap">
+  <div class="box"><svg viewBox="0 0 24 24"><path d="M4.5 12.5a2 2 0 100-4 2 2 0 000 4zM19.5 12.5a2 2 0 100-4 2 2 0 000 4zM9 7a2 2 0 100-4 2 2 0 000 4zM15 7a2 2 0 100-4 2 2 0 000 4zM12 12c-3 0-5 2.5-5 5a3 3 0 003 3c1 0 1.3-.5 2-.5s1 .5 2 .5a3 3 0 003-3c0-2.5-2-5-5-5z"/></svg></div>
+  <div>
+    <div class="k" style="color:var(--amber);font-family:Cairo;font-weight:700;margin-bottom:6px">من نحن</div>
+    <h2>لأنهم جزء من العائلة</h2>
+    <p>نعامل كل حيوان أليف يدخل عيادتنا كما لو كان فرداً من عائلتنا. فريقنا شغوف ومدرّب على أعلى المعايير، ونستخدم أحدث الأجهزة التشخيصية لضمان أفضل رعاية.</p>
+    <ul>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg> أطباء بيطريون مرخّصون وذوو خبرة</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg> أجهزة تشخيص ومختبر داخل العيادة</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg> بيئة نظيفة وآمنة ومريحة للحيوانات</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="sec cream" id="why"><div class="wrap">
+  <div class="head"><div class="k">لماذا نحن</div><h2>رعاية تطمئن قلبك</h2></div>
+  <div class="grid">
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2 4 4 0 017 2c0 5.5-7 10-7 10z"/></svg></div><h3>رعاية بحبّ</h3><p>نتعامل بلطف وصبر مع كل حيوان مهما كان وضعه.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 5 5.5.8-4 3.9 1 5.5L12 20l-5 2.6 1-5.5-4-3.9 5.5-.8z"/></svg></div><h3>خبرة موثوقة</h3><p>سنوات من الخبرة وآلاف الحالات الناجحة.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>حجز سهل وسريع</h3><p>احجز موعدك أونلاين أو عبر الواتساب خلال دقائق.</p></div>
+  </div>
+</div></section>
+
+<section class="band" id="contact"><div class="wrap">
+  <h2>احجز موعداً <span class="a">لحيوانك الأليف</span></h2>
+  <p>فريقنا جاهز لاستقبالك. احجز الآن أو تواصل معنا للطوارئ.</p>
+  <a class="btn btn-amber" href="#">احجز الآن · 011 000 0000</a>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <div><div class="bn" style="margin-bottom:12px"><div class="mk"><svg viewBox="0 0 24 24"><path d="M4.5 12.5a2 2 0 100-4 2 2 0 000 4zM19.5 12.5a2 2 0 100-4 2 2 0 000 4zM9 7a2 2 0 100-4 2 2 0 000 4zM15 7a2 2 0 100-4 2 2 0 000 4zM12 12c-3 0-5 2.5-5 5a3 3 0 003 3c1 0 1.3-.5 2-.5s1 .5 2 .5a3 3 0 003-3c0-2.5-2-5-5-5z"/></svg></div><b style="color:#fff">عيادة الرفق</b></div><p style="max-width:300px">عيادة بيطرية ومتجر مستلزمات — رعاية شاملة لأصدقائك الأوفياء.</p></div>
+    <div><h4>روابط</h4><ul><li><a href="#serv">خدماتنا</a></li><li><a href="#about">من نحن</a></li><li><a href="#contact">تواصل</a></li></ul></div>
+    <div><h4>تواصل</h4><ul><li>هاتف: 011 000 0000</li><li>info@alrifq.example</li><li>الرياض، المملكة العربية السعودية</li></ul></div>
+  </div>
+  <div class="bottom">© 2026 عيادة الرفق البيطرية (نموذج عرض). صُمّم بواسطة تسويقات.</div>
+</div></footer>
+
+<script>
+(function(){var o=document.querySelector('.wm');if(!o)return;var r='';for(var i=0;i<32;i++){r+='<div>'+Array(9).join('تسويقات ✦ نموذج عرض ✦ ')+'</div>';}o.innerHTML=r;})();
+</script>
+</body>
+</html>
