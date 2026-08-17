@@ -78,7 +78,7 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
 
 export function Stats() {
   return (
-    <section id="stats" className="py-20 bg-white dark:bg-[#1a1a2e] relative overflow-hidden">
+    <section id="stats" className="py-20 bg-white dark:bg-[#0f2419] relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#e94560] via-[#f5a623] to-[#0f3460]" />
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -88,7 +88,7 @@ export function Stats() {
               className={`text-center group card-hover p-5 rounded-2xl border transition-all duration-300 ${
                 s.gold
                   ? "border-[#f5a623]/40 bg-gradient-to-b from-[#fff9ee] to-white dark:from-[#2a2010] dark:to-[#1a1a2e] hover:border-[#f5a623]"
-                  : "border-gray-100 dark:border-white/10 hover:border-[#e94560]/30"
+                  : "border-gray-100 dark:border-white/8 hover:border-[#e94560]/30"
               }`}
             >
               <div

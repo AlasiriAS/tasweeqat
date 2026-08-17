@@ -41,12 +41,12 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
       {/* Quick stats */}
       <div className="grid grid-cols-4 gap-4">
         {[
-          { label: "Total Leads",   value: total,     color: "#0f3460"  },
-          { label: "High Priority", value: high,      color: "#e94560"  },
-          { label: "Medium",        value: medium,    color: "#f5a623"  },
-          { label: "No Website",    value: noWebsite, color: "#27ae60"  },
+          { label: "Total Leads",   value: total,     color: "#1B5E4B"  },
+          { label: "High Priority", value: high,      color: "#1B5E4B"  },
+          { label: "Medium",        value: medium,    color: "#E6C16A"  },
+          { label: "No Website",    value: noWebsite, color: "#2E7D68"  },
         ].map((s, i) => (
-          <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-xl p-4 border border-gray-100 dark:border-white/10">
+          <div key={i} className="bg-white dark:bg-[#0f2419] rounded-xl p-4 border border-gray-100 dark:border-white/8">
             <div className="text-2xl font-black" style={{ color: s.color }}>{s.value.toLocaleString()}</div>
             <div className="text-gray-500 dark:text-white/50 text-xs mt-1">{s.label}</div>
           </div>

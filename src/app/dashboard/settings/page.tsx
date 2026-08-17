@@ -14,7 +14,7 @@ export default async function SettingsPage() {
       icon: Globe,
       title: "Business Info",
       titleAr: "معلومات الشركة",
-      color: "#0f3460",
+      color: "#1B5E4B",
       items: [
         { label: "Company Name",  value: "Tasweeqat · تسويقات" },
         { label: "Website",       value: "tasweeqat.com" },
@@ -26,7 +26,7 @@ export default async function SettingsPage() {
       icon: Server,
       title: "Server & Hosting",
       titleAr: "الخادم والاستضافة",
-      color: "#27ae60",
+      color: "#2E7D68",
       items: [
         { label: "VPS Provider",  value: "Hostinger KVM 2" },
         { label: "Location",      value: "France (Paris)" },
@@ -39,7 +39,7 @@ export default async function SettingsPage() {
       icon: Mail,
       title: "Email",
       titleAr: "البريد الإلكتروني",
-      color: "#f5a623",
+      color: "#E6C16A",
       items: [
         { label: "Provider",      value: "Hostinger Business Email" },
         { label: "Plan",          value: "Starter (up to 5 mailboxes)" },
@@ -51,7 +51,7 @@ export default async function SettingsPage() {
       icon: Shield,
       title: "Security",
       titleAr: "الأمان",
-      color: "#e94560",
+      color: "#1B5E4B",
       items: [
         { label: "Auth",          value: "NextAuth.js v4 (JWT)" },
         { label: "Passwords",     value: "bcryptjs hashed" },
@@ -70,7 +70,7 @@ export default async function SettingsPage() {
 
       <div className="grid md:grid-cols-2 gap-5">
         {sections.map((section, i) => (
-          <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-2xl border border-gray-100 dark:border-white/10 p-6">
+          <div key={i} className="bg-white dark:bg-[#0f2419] rounded-2xl border border-gray-100 dark:border-white/8 p-6">
             <div className="flex items-center gap-3 mb-5">
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center"

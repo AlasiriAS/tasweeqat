@@ -25,8 +25,8 @@ export default async function AnalyticsPage() {
   const maxCity = Math.max(...byCity.map(c => c._count.id), 1);
 
   const STATUS_COLORS: Record<string, string> = {
-    no_website: "#e94560", social_only: "#f5a623",
-    broken_website: "#9b59b6", has_website: "#27ae60",
+    no_website: "#1B5E4B", social_only: "#E6C16A",
+    broken_website: "#9b59b6", has_website: "#2E7D68",
   };
   const STATUS_LABELS: Record<string, string> = {
     no_website: "No Website", social_only: "Social Only",
@@ -43,12 +43,12 @@ export default async function AnalyticsPage() {
       {/* KPI row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: "Total Leads",      value: totalLeads.toLocaleString(),    sub: "identified",        color: "#0f3460" },
-          { label: "Conversion Rate",  value: `${conversionRate}%`,           sub: "leads → pipeline",  color: "#e94560" },
-          { label: "Delivery Rate",    value: `${deliveryRate}%`,             sub: "pipeline → done",   color: "#27ae60" },
-          { label: "Total Revenue",    value: formatSAR(totalRevenue),        sub: "sites + hosting",   color: "#f5a623" },
+          { label: "Total Leads",      value: totalLeads.toLocaleString(),    sub: "identified",        color: "#1B5E4B" },
+          { label: "Conversion Rate",  value: `${conversionRate}%`,           sub: "leads → pipeline",  color: "#1B5E4B" },
+          { label: "Delivery Rate",    value: `${deliveryRate}%`,             sub: "pipeline → done",   color: "#2E7D68" },
+          { label: "Total Revenue",    value: formatSAR(totalRevenue),        sub: "sites + hosting",   color: "#E6C16A" },
         ].map((k, i) => (
-          <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-5 border border-gray-100 dark:border-white/10">
+          <div key={i} className="bg-white dark:bg-[#0f2419] rounded-2xl p-5 border border-gray-100 dark:border-white/8">
             <div className="text-2xl font-black" style={{ color: k.color }}>{k.value}</div>
             <div className="text-gray-700 dark:text-white/70 text-sm font-semibold mt-1">{k.label}</div>
             <div className="text-gray-400 dark:text-white/30 text-xs">{k.sub}</div>
@@ -58,7 +58,7 @@ export default async function AnalyticsPage() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Leads by city */}
-        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-100 dark:border-white/10">
+        <div className="bg-white dark:bg-[#0f2419] rounded-2xl p-6 border border-gray-100 dark:border-white/8">
           <h3 className="font-bold text-gray-900 dark:text-white mb-1">Top Cities</h3>
           <p className="text-gray-400 dark:text-white/30 text-xs mb-5">أكثر المدن نشاطاً</p>
           <div className="space-y-3">
@@ -68,7 +68,7 @@ export default async function AnalyticsPage() {
                 <div className="flex-1 bg-gray-100 dark:bg-white/5 rounded-full h-6 overflow-hidden">
                   <div
                     className="h-full rounded-full flex items-center justify-end pr-2"
-                    style={{ width: `${(c._count.id / maxCity) * 100}%`, background: "#e94560" }}
+                    style={{ width: `${(c._count.id / maxCity) * 100}%`, background: "#1B5E4B" }}
                   >
                     <span className="text-white text-xs font-bold">{c._count.id}</span>
                   </div>
@@ -79,7 +79,7 @@ export default async function AnalyticsPage() {
         </div>
 
         {/* Website status breakdown */}
-        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-100 dark:border-white/10">
+        <div className="bg-white dark:bg-[#0f2419] rounded-2xl p-6 border border-gray-100 dark:border-white/8">
           <h3 className="font-bold text-gray-900 dark:text-white mb-1">Website Status</h3>
           <p className="text-gray-400 dark:text-white/30 text-xs mb-5">حالة المواقع الإلكترونية</p>
           <div className="space-y-4">
@@ -106,7 +106,7 @@ export default async function AnalyticsPage() {
         </div>
 
         {/* Pipeline funnel */}
-        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-100 dark:border-white/10">
+        <div className="bg-white dark:bg-[#0f2419] rounded-2xl p-6 border border-gray-100 dark:border-white/8">
           <h3 className="font-bold text-gray-900 dark:text-white mb-1">Pipeline Funnel</h3>
           <p className="text-gray-400 dark:text-white/30 text-xs mb-5">مسار المبيعات</p>
           <div className="space-y-3">
@@ -131,14 +131,14 @@ export default async function AnalyticsPage() {
         </div>
 
         {/* Revenue summary */}
-        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-100 dark:border-white/10">
+        <div className="bg-white dark:bg-[#0f2419] rounded-2xl p-6 border border-gray-100 dark:border-white/8">
           <h3 className="font-bold text-gray-900 dark:text-white mb-1">Revenue Breakdown</h3>
           <p className="text-gray-400 dark:text-white/30 text-xs mb-5">تفاصيل الإيرادات</p>
           <div className="space-y-4">
             {[
-              { label: "Website Revenue",  labelAr: "عائد المواقع",   value: revenue._sum.agreedPrice || 0,  color: "#0f3460" },
-              { label: "Monthly Hosting",  labelAr: "الاستضافة الشهرية", value: monthlyHosting * 50, color: "#27ae60" },
-              { label: "Active Hosting Clients", labelAr: "عملاء الاستضافة", value: monthlyHosting, isCount: true, color: "#f5a623" },
+              { label: "Website Revenue",  labelAr: "عائد المواقع",   value: revenue._sum.agreedPrice || 0,  color: "#1B5E4B" },
+              { label: "Monthly Hosting",  labelAr: "الاستضافة الشهرية", value: monthlyHosting * 50, color: "#2E7D68" },
+              { label: "Active Hosting Clients", labelAr: "عملاء الاستضافة", value: monthlyHosting, isCount: true, color: "#E6C16A" },
             ].map((r, i) => (
               <div key={i} className="flex items-center justify-between py-3 border-b border-gray-50 dark:border-white/5 last:border-0">
                 <div>
@@ -152,7 +152,7 @@ export default async function AnalyticsPage() {
             ))}
             <div className="flex items-center justify-between pt-2">
               <div className="font-bold text-gray-900 dark:text-white">Total</div>
-              <div className="text-xl font-black text-[#e94560]">{formatSAR(totalRevenue)}</div>
+              <div className="text-xl font-black text-[#2E7D68]">{formatSAR(totalRevenue)}</div>
             </div>
           </div>
         </div>

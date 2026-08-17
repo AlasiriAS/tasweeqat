@@ -13,7 +13,7 @@ export default async function DashboardLayout({
   if (!session) redirect("/login");
 
   return (
-    <div className="flex h-screen bg-[#f0f2f5] dark:bg-[#0d0d1a] overflow-hidden">
+    <div className="flex h-screen bg-[#F7F7F7] dark:bg-[#091a12] overflow-hidden">
       <Sidebar user={session.user as any} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <DashboardHeader user={session.user as any} />

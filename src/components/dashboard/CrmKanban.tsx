@@ -139,10 +139,10 @@ export function CrmKanban({ initialRecords }: Props) {
                               {...prov.dragHandleProps}
                               onClick={() => setSelected(rec)}
                               className={cn(
-                                "bg-white dark:bg-[#1a1a2e] rounded-xl p-3 border cursor-pointer group transition-all",
+                                "bg-white dark:bg-[#0f2419] rounded-xl p-3 border cursor-pointer group transition-all",
                                 snap.isDragging
-                                  ? "shadow-xl rotate-1 border-[#e94560]"
-                                  : "border-gray-100 dark:border-white/10 hover:border-[#e94560]/40 hover:shadow-md"
+                                  ? "shadow-xl rotate-1 border-[#E6C16A]"
+                                  : "border-gray-100 dark:border-white/8 hover:border-[#E6C16A]/40 hover:shadow-md"
                               )}
                             >
                               <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-1">
@@ -162,7 +162,7 @@ export function CrmKanban({ initialRecords }: Props) {
                                 )}>
                                   {rec.lead.priority}
                                 </span>
-                                <span className="text-xs font-bold text-[#0f3460] dark:text-blue-400">
+                                <span className="text-xs font-bold text-[#1B5E4B] dark:text-[#E6C16A]">
                                   {formatSAR(rec.agreedPrice)}
                                 </span>
                               </div>
@@ -190,11 +190,11 @@ export function CrmKanban({ initialRecords }: Props) {
       {selected && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-end" onClick={() => setSelected(null)}>
           <div
-            className="h-full w-full max-w-md bg-white dark:bg-[#1a1a2e] shadow-2xl overflow-y-auto flex flex-col"
+            className="h-full w-full max-w-md bg-white dark:bg-[#0f2419] shadow-2xl overflow-y-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Panel header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-white/10">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-white/8">
               <div>
                 <h3 className="font-black text-gray-900 dark:text-white">{selected.lead.businessName}</h3>
                 <p className="text-gray-400 dark:text-white/40 text-xs">{selected.lead.city} · {selected.lead.category}</p>
@@ -252,7 +252,7 @@ export function CrmKanban({ initialRecords }: Props) {
                   )}
                   {selected.lead.website && (
                     <a href={selected.lead.website} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 px-3 py-2 rounded-lg text-sm font-semibold hover:bg-blue-100">
+                      className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-[#E6C16A] px-3 py-2 rounded-lg text-sm font-semibold hover:bg-blue-100">
                       <Globe size={14} /> Website
                     </a>
                   )}
@@ -294,7 +294,7 @@ export function CrmKanban({ initialRecords }: Props) {
                 <div>
                   <label className="text-xs font-bold text-gray-500 dark:text-white/50 uppercase tracking-wider mb-2 block">Google Rating</label>
                   <div className="flex items-center gap-1">
-                    <Star size={14} className="text-[#f5a623] fill-[#f5a623]" />
+                    <Star size={14} className="text-[#c9a24e] fill-[#E6C16A]" />
                     <span className="font-bold text-gray-900 dark:text-white">{selected.lead.rating}</span>
                   </div>
                 </div>
@@ -323,12 +323,12 @@ export function CrmKanban({ initialRecords }: Props) {
                     onChange={e => setNoteText(e.target.value)}
                     onKeyDown={e => e.key === "Enter" && !e.shiftKey && saveNote()}
                     placeholder="Add a note..."
-                    className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-white/10 rounded-lg bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e94560]"
+                    className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-white/8 rounded-lg bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D68]"
                   />
                   <button
                     onClick={saveNote}
                     disabled={saving || !noteText.trim()}
-                    className="bg-[#e94560] text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-[#c73652] disabled:opacity-40 transition-colors"
+                    className="bg-[#1B5E4B] text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-[#145240] disabled:opacity-40 transition-colors"
                   >
                     {saving ? "..." : "Save"}
                   </button>

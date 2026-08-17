@@ -121,7 +121,7 @@ export function Contact() {
           <div className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-8 border border-gray-100 dark:border-white/10 shadow-xl"
+              className="bg-white dark:bg-[#0f2419] rounded-3xl p-8 border border-gray-100 dark:border-white/8 shadow-xl"
             >
               <h3 className="text-xl font-black text-gray-900 dark:text-white mb-1">
                 <span className="lang-ar">اترك بياناتك</span>
@@ -143,7 +143,7 @@ export function Contact() {
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="مثال: مطعم الأصيل، صالون الجمال..."
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e94560] transition-all text-sm"
+                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e94560] transition-all text-sm"
                   />
                 </div>
 
@@ -159,7 +159,7 @@ export function Contact() {
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+966 5X XXX XXXX"
                     dir="ltr"
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e94560] transition-all text-sm"
+                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e94560] transition-all text-sm"
                   />
                 </div>
 
@@ -172,7 +172,7 @@ export function Contact() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="الاسم الكريم"
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e94560] transition-all text-sm"
+                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/5 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e94560] transition-all text-sm"
                   />
                 </div>
               </div>

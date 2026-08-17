@@ -7,22 +7,21 @@ import {
   MessageSquare, Settings, LogOut, Globe,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
-import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/dashboard",          icon: LayoutDashboard, label: "Overview",    labelAr: "نظرة عامة"      },
-  { href: "/dashboard/leads",    icon: Users,           label: "Leads",       labelAr: "العملاء المحتملون" },
-  { href: "/dashboard/crm",      icon: GitBranch,       label: "CRM Pipeline",labelAr: "خط المبيعات"    },
-  { href: "/dashboard/analytics",icon: BarChart3,       label: "Analytics",   labelAr: "التحليلات"      },
-  { href: "/dashboard/contacts", icon: MessageSquare,   label: "Contacts",    labelAr: "الرسائل"        },
-  { href: "/dashboard/users",    icon: Users,           label: "Users",       labelAr: "المستخدمون"     },
-  { href: "/dashboard/settings", icon: Settings,        label: "Settings",    labelAr: "الإعدادات"      },
+  { href: "/dashboard",           icon: LayoutDashboard, label: "Overview",     labelAr: "نظرة عامة"        },
+  { href: "/dashboard/leads",     icon: Users,           label: "Leads",        labelAr: "العملاء المحتملون" },
+  { href: "/dashboard/crm",       icon: GitBranch,       label: "CRM Pipeline", labelAr: "خط المبيعات"      },
+  { href: "/dashboard/analytics", icon: BarChart3,       label: "Analytics",    labelAr: "التحليلات"        },
+  { href: "/dashboard/contacts",  icon: MessageSquare,   label: "Contacts",     labelAr: "الرسائل"          },
+  { href: "/dashboard/users",     icon: Users,           label: "Users",        labelAr: "المستخدمون"       },
+  { href: "/dashboard/settings",  icon: Settings,        label: "Settings",     labelAr: "الإعدادات"        },
 ];
 
 const adminOnly = ["/dashboard/users", "/dashboard/settings"];
 
 interface SidebarProps {
-  user: { name?: string | null; email?: string | null; role?: string; };
+  user: { name?: string | null; email?: string | null; role?: string };
 }
 
 export function Sidebar({ user }: SidebarProps) {
@@ -34,76 +33,210 @@ export function Sidebar({ user }: SidebarProps) {
   );
 
   return (
-    <aside className="w-64 bg-[#1a1a2e] flex flex-col h-full flex-shrink-0 shadow-2xl">
-      {/* Logo */}
-      <div className="p-6 border-b border-white/10">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#e94560] rounded-xl flex items-center justify-center font-black text-white text-lg">
-            T
-          </div>
-          <div>
-            <div className="text-white font-bold text-base leading-none">Tasweeqat</div>
-            <div className="text-white/30 text-xs mt-0.5">تسويقات Dashboard</div>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&family=Tajawal:wght@400;500;700&display=swap');
+
+        .sidebar {
+          width: 256px;
+          background: linear-gradient(160deg, #1f6b52 0%, #1B5E4B 50%, #103c31 100%);
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          flex-shrink: 0;
+          box-shadow: 4px 0 24px rgba(0,0,0,.18);
+          font-family: "Tajawal","Cairo",sans-serif;
+        }
+
+        .sb-logo {
+          padding: 22px 20px;
+          border-bottom: 1px solid rgba(255,255,255,.1);
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          text-decoration: none;
+        }
+        .sb-logo-mark {
+          width: 42px; height: 42px;
+          background: linear-gradient(135deg, #E6C16A, #c9a24e);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: "Cairo";
+          font-weight: 900;
+          color: #3a2c0c;
+          font-size: 20px;
+          flex-shrink: 0;
+          box-shadow: 0 4px 12px rgba(230,193,106,.35);
+        }
+        .sb-logo-text { line-height: 1; }
+        .sb-logo-text .name {
+          color: #fff;
+          font-family: "Cairo";
+          font-weight: 700;
+          font-size: 16px;
+        }
+        .sb-logo-text .sub {
+          color: rgba(255,255,255,.45);
+          font-size: 11px;
+          margin-top: 2px;
+        }
+
+        .sb-user {
+          padding: 14px 16px;
+          border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+        .sb-user-inner {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: rgba(255,255,255,.07);
+          border-radius: 12px;
+          padding: 10px 12px;
+        }
+        .sb-avatar {
+          width: 36px; height: 36px;
+          background: linear-gradient(135deg, #E6C16A, #c9a24e);
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #3a2c0c;
+          font-family: "Cairo";
+          font-weight: 900;
+          font-size: 15px;
+          flex-shrink: 0;
+        }
+        .sb-user-name {
+          color: #fff;
+          font-size: 14px;
+          font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .sb-user-role {
+          color: rgba(255,255,255,.4);
+          font-size: 11px;
+          text-transform: capitalize;
+        }
+
+        .sb-nav {
+          flex: 1;
+          padding: 14px 12px;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .sb-link {
+          display: flex;
+          align-items: center;
+          gap: 11px;
+          padding: 10px 14px;
+          border-radius: 11px;
+          text-decoration: none;
+          color: rgba(255,255,255,.6);
+          transition: background .15s, color .15s;
+          font-size: 13.5px;
+        }
+        .sb-link:hover {
+          background: rgba(255,255,255,.08);
+          color: #fff;
+        }
+        .sb-link.active {
+          background: rgba(230,193,106,.15);
+          color: #E6C16A;
+          border: 1px solid rgba(230,193,106,.25);
+        }
+        .sb-link.active svg { stroke: #E6C16A; }
+        .sb-link-label { font-weight: 600; line-height: 1; }
+        .sb-link-label-ar { font-size: 11px; opacity: .6; margin-top: 2px; }
+
+        .sb-bottom {
+          padding: 12px;
+          border-top: 1px solid rgba(255,255,255,.1);
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .sb-link-danger {
+          color: rgba(252,165,165,.7) !important;
+        }
+        .sb-link-danger:hover {
+          background: rgba(239,68,68,.12) !important;
+          color: #fca5a5 !important;
+        }
+        .sb-link-btn {
+          background: none;
+          border: none;
+          width: 100%;
+          text-align: left;
+          cursor: pointer;
+          font-family: inherit;
+        }
+      `}</style>
+
+      <aside className="sidebar">
+        {/* Logo */}
+        <Link href="/" className="sb-logo">
+          <div className="sb-logo-mark">T</div>
+          <div className="sb-logo-text">
+            <div className="name">تسويقات</div>
+            <div className="sub">Tasweeqat Dashboard</div>
           </div>
         </Link>
-      </div>
 
-      {/* User info */}
-      <div className="px-4 py-4 border-b border-white/10">
-        <div className="flex items-center gap-3 bg-white/5 rounded-xl p-3">
-          <div className="w-9 h-9 bg-[#e94560] rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-            {(user.name || "A")[0].toUpperCase()}
-          </div>
-          <div className="min-w-0">
-            <div className="text-white text-sm font-semibold truncate">{user.name}</div>
-            <div className="text-white/40 text-xs capitalize">{user.role}</div>
+        {/* User */}
+        <div className="sb-user">
+          <div className="sb-user-inner">
+            <div className="sb-avatar">{(user.name || "A")[0].toUpperCase()}</div>
+            <div style={{ minWidth: 0 }}>
+              <div className="sb-user-name">{user.name}</div>
+              <div className="sb-user-role">{user.role}</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Nav */}
-      <nav className="flex-1 p-4 overflow-y-auto">
-        <div className="space-y-1">
+        {/* Nav */}
+        <nav className="sb-nav">
           {filtered.map((item) => {
-            const active = pathname === item.href ||
+            const active =
+              pathname === item.href ||
               (item.href !== "/dashboard" && pathname.startsWith(item.href));
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={cn(
-                  "sidebar-link",
-                  active && "active"
-                )}
+                className={`sb-link${active ? " active" : ""}`}
               >
-                <item.icon size={18} className="flex-shrink-0" />
+                <item.icon size={17} style={{ flexShrink: 0 }} />
                 <div>
-                  <div className="text-sm leading-none">{item.label}</div>
-                  <div className="text-xs opacity-60 mt-0.5">{item.labelAr}</div>
+                  <div className="sb-link-label">{item.label}</div>
+                  <div className="sb-link-label-ar">{item.labelAr}</div>
                 </div>
               </Link>
             );
           })}
-        </div>
-      </nav>
+        </nav>
 
-      {/* Bottom actions */}
-      <div className="p-4 border-t border-white/10 space-y-1">
-        <Link
-          href="/"
-          className="sidebar-link"
-        >
-          <Globe size={18} />
-          <span className="text-sm">View Website</span>
-        </Link>
-        <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
-          className="sidebar-link w-full text-left text-red-400 hover:text-red-300 hover:bg-red-500/10"
-        >
-          <LogOut size={18} />
-          <span className="text-sm">Sign Out</span>
-        </button>
-      </div>
-    </aside>
+        {/* Bottom */}
+        <div className="sb-bottom">
+          <Link href="/" className="sb-link">
+            <Globe size={17} style={{ flexShrink: 0 }} />
+            <span className="sb-link-label">View Website</span>
+          </Link>
+          <button
+            className="sb-link sb-link-danger sb-link-btn"
+            onClick={() => signOut({ callbackUrl: "/login" })}
+          >
+            <LogOut size={17} style={{ flexShrink: 0 }} />
+            <span className="sb-link-label">تسجيل الخروج</span>
+          </button>
+        </div>
+      </aside>
+    </>
   );
 }

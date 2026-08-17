@@ -43,7 +43,7 @@ const cards = [
 
 export function VisionMission() {
   return (
-    <section id="vision" className="py-24 bg-white dark:bg-[#1a1a2e] relative overflow-hidden">
+    <section id="vision" className="py-24 bg-white dark:bg-[#0f2419] relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#e94560] rounded-full blur-[150px] opacity-5" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#0f3460] rounded-full blur-[150px] opacity-10" />
@@ -64,7 +64,7 @@ export function VisionMission() {
           {cards.map((item, i) => (
             <div
               key={i}
-              className="relative bg-gray-50 dark:bg-[#0d0d1a] rounded-3xl p-8 border border-gray-100 dark:border-white/10 card-hover group overflow-hidden"
+              className="relative bg-gray-50 dark:bg-[#0d0d1a] rounded-3xl p-8 border border-gray-100 dark:border-white/8 card-hover group overflow-hidden"
             >
               <div className="absolute top-0 left-0 right-0 h-1 rounded-t-3xl" style={{ background: item.color }} />
               <div

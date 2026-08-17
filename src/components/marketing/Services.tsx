@@ -78,7 +78,7 @@ export function Services() {
             <div
               key={i}
               ref={(el) => { refs.current[i] = el; }}
-              className="fade-up card-hover bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-100 dark:border-white/10 group cursor-pointer"
+              className="fade-up card-hover bg-white dark:bg-[#0f2419] rounded-2xl p-6 border border-gray-100 dark:border-white/8 group cursor-pointer"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               <div
@@ -97,7 +97,7 @@ export function Services() {
                 <span className="lang-en">{s.en.desc}</span>
               </p>
 
-              <div className="mt-5 pt-4 border-t border-gray-100 dark:border-white/10">
+              <div className="mt-5 pt-4 border-t border-gray-100 dark:border-white/8">
                 <a
                   href="#contact"
                   className="text-xs font-bold transition-colors"

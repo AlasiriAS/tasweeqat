@@ -19,8 +19,9 @@ const cards = (k: KPIs) => [
     labelAr: "إجمالي العملاء",
     value:   k.totalLeads.toLocaleString(),
     sub:     "Identified businesses",
-    color:   "#0f3460",
-    bg:      "bg-blue-50 dark:bg-blue-950/20",
+    color:   "#1B5E4B",
+    bgLight: "rgba(27,94,75,.07)",
+    bgDark:  "rgba(27,94,75,.25)",
   },
   {
     icon:    Target,
@@ -28,8 +29,9 @@ const cards = (k: KPIs) => [
     labelAr: "أولوية عالية",
     value:   k.highPriority.toLocaleString(),
     sub:     "Best prospects",
-    color:   "#e94560",
-    bg:      "bg-red-50 dark:bg-red-950/20",
+    color:   "#b45309",
+    bgLight: "rgba(180,83,9,.07)",
+    bgDark:  "rgba(180,83,9,.2)",
   },
   {
     icon:    TrendingUp,
@@ -37,8 +39,9 @@ const cards = (k: KPIs) => [
     labelAr: "في المبيعات",
     value:   k.inPipeline.toLocaleString(),
     sub:     "Active deals",
-    color:   "#f5a623",
-    bg:      "bg-amber-50 dark:bg-amber-950/20",
+    color:   "#c9a24e",
+    bgLight: "rgba(201,162,78,.1)",
+    bgDark:  "rgba(201,162,78,.15)",
   },
   {
     icon:    CheckCircle,
@@ -46,8 +49,9 @@ const cards = (k: KPIs) => [
     labelAr: "تم التسليم",
     value:   k.delivered.toLocaleString(),
     sub:     `Goal: 100 (${Math.round(k.delivered)}%)`,
-    color:   "#27ae60",
-    bg:      "bg-green-50 dark:bg-green-950/20",
+    color:   "#2E7D68",
+    bgLight: "rgba(46,125,104,.08)",
+    bgDark:  "rgba(46,125,104,.2)",
   },
   {
     icon:    DollarSign,
@@ -55,8 +59,9 @@ const cards = (k: KPIs) => [
     labelAr: "إجمالي الإيرادات",
     value:   formatSAR(k.revenue),
     sub:     "From delivered sites",
-    color:   "#9b59b6",
-    bg:      "bg-purple-50 dark:bg-purple-950/20",
+    color:   "#E6C16A",
+    bgLight: "rgba(230,193,106,.1)",
+    bgDark:  "rgba(230,193,106,.12)",
   },
   {
     icon:    MessageSquare,
@@ -64,8 +69,9 @@ const cards = (k: KPIs) => [
     labelAr: "رسائل جديدة",
     value:   k.contacts.toLocaleString(),
     sub:     "From website form",
-    color:   "#1abc9c",
-    bg:      "bg-teal-50 dark:bg-teal-950/20",
+    color:   "#0e7490",
+    bgLight: "rgba(14,116,144,.07)",
+    bgDark:  "rgba(14,116,144,.2)",
   },
 ];
 
@@ -75,21 +81,28 @@ export function DashboardKPIs({ kpis }: { kpis: KPIs }) {
       {cards(kpis).map((card, i) => (
         <div
           key={i}
-          className={`${card.bg} rounded-2xl p-5 border border-gray-100 dark:border-white/10 card-hover group`}
+          className="card-hover rounded-2xl p-5 group"
+          style={{
+            background: "var(--card)",
+            border: "1.5px solid var(--border)",
+          }}
         >
           <div
             className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3 group-hover:scale-110 transition-transform"
-            style={{ background: `${card.color}18` }}
+            style={{ background: card.bgLight }}
           >
             <card.icon size={20} style={{ color: card.color }} />
           </div>
 
-          <div className="text-2xl font-black text-gray-900 dark:text-white mb-1 leading-none">
+          <div
+            className="text-2xl font-black mb-1 leading-none"
+            style={{ color: "var(--text)", fontFamily: "'Cairo',sans-serif" }}
+          >
             {card.value}
           </div>
-          <div className="text-gray-700 dark:text-white/70 text-xs font-semibold">{card.label}</div>
+          <div className="text-xs font-semibold" style={{ color: "var(--text)" }}>{card.label}</div>
           <div className="text-xs font-medium mt-0.5" style={{ color: card.color }}>{card.labelAr}</div>
-          <div className="text-gray-400 dark:text-white/30 text-xs mt-1">{card.sub}</div>
+          <div className="text-xs mt-1" style={{ color: "var(--muted)" }}>{card.sub}</div>
         </div>
       ))}
     </div>

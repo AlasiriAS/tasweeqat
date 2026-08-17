@@ -20,7 +20,7 @@ const cardItems = [
 
 export function About() {
   return (
-    <section id="about" className="py-24 bg-white dark:bg-[#1a1a2e] relative overflow-hidden">
+    <section id="about" className="py-24 bg-white dark:bg-[#0f2419] relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
