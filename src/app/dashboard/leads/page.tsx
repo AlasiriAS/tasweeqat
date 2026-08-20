@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { LeadsTable } from "@/components/dashboard/LeadsTable";
+import { AddLeadButton } from "@/components/dashboard/AddLeadButton";
 
 interface SearchParams { priority?: string; city?: string; status?: string; search?: string; }
 
@@ -36,6 +37,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
             {total.toLocaleString()} businesses identified · {high} high priority
           </p>
         </div>
+        <AddLeadButton />
       </div>
 
       {/* Quick stats */}

@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
-import { Phone, Globe, Star, X, MessageSquare, DollarSign, CheckCircle } from "lucide-react";
+import { Phone, Globe, Star, X, MessageSquare, DollarSign, CheckCircle, FileText } from "lucide-react";
 import { cn, PIPELINE_STAGES, formatSAR } from "@/lib/utils";
 import toast from "react-hot-toast";
 
@@ -287,6 +287,20 @@ export function CrmKanban({ initialRecords }: Props) {
                     </button>
                   </div>
                 </div>
+              </div>
+
+              {/* Quotation */}
+              <div>
+                <label className="text-xs font-bold text-gray-500 dark:text-white/50 uppercase tracking-wider mb-2 block">
+                  <FileText size={12} className="inline mr-1" /> Quotation
+                </label>
+                <a
+                  href={`/dashboard/crm/quotation/${selected.id}`}
+                  target="_blank"
+                  className="flex items-center gap-2 w-full justify-center px-4 py-2.5 bg-[#1B5E4B] hover:bg-[#2E7D68] text-white text-sm font-bold rounded-xl transition-colors"
+                >
+                  <FileText size={14} /> Generate Quotation PDF
+                </a>
               </div>
 
               {/* Lead details */}
