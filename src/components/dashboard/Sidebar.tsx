@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Users, GitBranch, BarChart3,
@@ -182,7 +183,9 @@ export function Sidebar({ user }: SidebarProps) {
       <aside className="sidebar">
         {/* Logo */}
         <Link href="/" className="sb-logo">
-          <div className="sb-logo-mark">T</div>
+          <div className="sb-logo-mark" style={{ background: "transparent", padding: 0, overflow: "hidden" }}>
+            <Image src="/tasweeqat-logo.png" alt="تسويقات" width={44} height={44} style={{ objectFit: "contain" }} />
+          </div>
           <div className="sb-logo-text">
             <div className="name">تسويقات</div>
             <div className="sub">Tasweeqat Dashboard</div>

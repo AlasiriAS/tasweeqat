@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Filter, Phone, Globe, MapPin, Star, Plus } from "lucide-react";
+import { Search, Filter, Phone, Globe, MapPin, Star, Plus, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 
@@ -19,6 +19,15 @@ interface Props {
   cities:  string[];
   filters: { priority?: string; city?: string; status?: string; search?: string; };
 }
+
+const toWhatsApp = (phone: string, name: string) => {
+  // Format Saudi numbers: 05XXXXXXXX → 9665XXXXXXXX
+  let num = phone.replace(/\D/g, "");
+  if (num.startsWith("0")) num = "966" + num.slice(1);
+  else if (num.startsWith("5") && num.length === 9) num = "966" + num;
+  const greeting = `السلام عليكم،%0Aأنا من شركة تسويقات لتصميم المواقع الإلكترونية.%0Aأود التحدث معكم بشأن ${encodeURIComponent(name)} وكيف يمكننا مساعدتكم في تطوير حضوركم الرقمي.`;
+  return `https://wa.me/${num}?text=${greeting}`;
+};
 
 const STATUS_LABELS: Record<string, string> = {
   no_website:     "No Website",
@@ -201,25 +210,34 @@ export function LeadsTable({ leads, cities, filters }: Props) {
               <div className="flex border-t border-gray-100 dark:border-white/8">
                 {lead.phone ? (
                   <a href={`tel:${lead.phone}`}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-bold text-white bg-green-600 hover:bg-green-700 transition-colors">
-                    <Phone size={12} /> Call
+                    className="flex-1 flex items-center justify-center gap-1 py-2.5 text-xs font-bold text-white bg-green-600 hover:bg-green-700 transition-colors">
+                    <Phone size={11} /> Call
                   </a>
                 ) : (
-                  <div className="flex-1 flex items-center justify-center py-2.5 text-xs text-gray-300 dark:text-white/20">No phone</div>
+                  <div className="flex-1 flex items-center justify-center py-2.5 text-xs text-gray-300 dark:text-white/20">—</div>
+                )}
+
+                {lead.phone ? (
+                  <a href={toWhatsApp(lead.phone, lead.businessName)} target="_blank" rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-1 py-2.5 text-xs font-bold text-white bg-[#25D366] hover:bg-[#1ebe5d] transition-colors border-l border-gray-100 dark:border-white/8">
+                    <MessageCircle size={11} /> WA
+                  </a>
+                ) : (
+                  <div className="flex-1 flex items-center justify-center py-2.5 text-xs text-gray-300 dark:text-white/20 border-l border-gray-100 dark:border-white/8">—</div>
                 )}
 
                 {lead.googleMapsUrl ? (
                   <a href={lead.googleMapsUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-bold text-white bg-[#0a1f14] hover:bg-[#1B5E4B] transition-colors border-l border-gray-100 dark:border-white/8">
-                    <MapPin size={12} /> Maps
+                    className="flex-1 flex items-center justify-center gap-1 py-2.5 text-xs font-bold text-white bg-[#0a1f14] hover:bg-[#1B5E4B] transition-colors border-l border-gray-100 dark:border-white/8">
+                    <MapPin size={11} /> Maps
                   </a>
                 ) : lead.website ? (
                   <a href={lead.website} target="_blank" rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-bold text-white bg-[#0a1f14] hover:bg-[#1B5E4B] transition-colors border-l border-gray-100 dark:border-white/8">
-                    <Globe size={12} /> Website
+                    className="flex-1 flex items-center justify-center gap-1 py-2.5 text-xs font-bold text-white bg-[#0a1f14] hover:bg-[#1B5E4B] transition-colors border-l border-gray-100 dark:border-white/8">
+                    <Globe size={11} /> Web
                   </a>
                 ) : (
-                  <div className="flex-1 flex items-center justify-center py-2.5 text-xs text-gray-300 dark:text-white/20 border-l border-gray-100 dark:border-white/8">No link</div>
+                  <div className="flex-1 flex items-center justify-center py-2.5 text-xs text-gray-300 dark:text-white/20 border-l border-gray-100 dark:border-white/8">—</div>
                 )}
               </div>
 

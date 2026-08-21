@@ -1,7 +1,12 @@
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { CrmKanban } from "@/components/dashboard/CrmKanban";
 
 export default async function CrmPage() {
+  const session = await getServerSession(authOptions);
+  const currentUserId = (session?.user as any)?.id as string | undefined;
+
   const records = await prisma.crmRecord.findMany({
     include: {
       lead:     true,
@@ -28,7 +33,7 @@ export default async function CrmPage() {
         </div>
       </div>
 
-      <CrmKanban initialRecords={records as any} />
+      <CrmKanban initialRecords={records as any} currentUserId={currentUserId} />
     </div>
   );
 }

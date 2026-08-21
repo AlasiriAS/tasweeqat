@@ -17,20 +17,34 @@ interface CrmNote { id: string; content: string; createdAt: string; }
 interface CrmRecord {
   id: string; leadId: string; stage: string; agreedPrice: number;
   hostingActive: boolean; upsellServices: string[];
+  assignedId: string | null;
   lead: Lead;
   assigned: { id: string; name: string | null } | null;
   notes: CrmNote[];
 }
 
-interface Props { initialRecords: CrmRecord[]; }
+interface Props { initialRecords: CrmRecord[]; currentUserId?: string; }
 
-export function CrmKanban({ initialRecords }: Props) {
+type FilterMode = "all" | "mine" | "unassigned";
+
+export function CrmKanban({ initialRecords, currentUserId }: Props) {
   const [records, setRecords] = useState<CrmRecord[]>(initialRecords);
   const [selected, setSelected] = useState<CrmRecord | null>(null);
   const [noteText, setNoteText] = useState("");
   const [saving, setSaving] = useState(false);
+  const [filterMode, setFilterMode] = useState<FilterMode>("all");
+  const [showLog, setShowLog] = useState(false);
 
-  const byStage = (stageId: string) => records.filter(r => r.stage === stageId);
+  const visibleRecords = records.filter(r => {
+    if (filterMode === "mine")       return r.assignedId === currentUserId;
+    if (filterMode === "unassigned") return !r.assignedId;
+    return true;
+  });
+
+  const byStage = (stageId: string) => visibleRecords.filter(r => r.stage === stageId);
+
+  const isTaken = (r: CrmRecord) =>
+    !!r.assignedId && r.assignedId !== currentUserId;
 
   const onDragEnd = useCallback(async (result: DropResult) => {
     if (!result.destination) return;
@@ -95,6 +109,27 @@ export function CrmKanban({ initialRecords }: Props) {
 
   return (
     <>
+      {/* Filter bar */}
+      <div className="flex items-center gap-2 mb-4 flex-wrap">
+        {(["all", "mine", "unassigned"] as FilterMode[]).map(mode => (
+          <button
+            key={mode}
+            onClick={() => setFilterMode(mode)}
+            className={cn(
+              "px-3 py-1.5 rounded-lg text-xs font-bold transition-colors",
+              filterMode === mode
+                ? "bg-[#1B5E4B] text-white"
+                : "bg-white dark:bg-white/5 text-gray-500 dark:text-white/40 border border-gray-200 dark:border-white/8 hover:bg-gray-50"
+            )}
+          >
+            {mode === "all" ? "🗂 All Cards" : mode === "mine" ? "👤 My Cards" : "📭 Unassigned"}
+          </button>
+        ))}
+        <span className="text-xs text-gray-400 dark:text-white/30 ml-2">
+          {visibleRecords.length} records
+        </span>
+      </div>
+
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex gap-4 overflow-x-auto pb-4">
           {PIPELINE_STAGES.map((stage) => {
@@ -139,10 +174,13 @@ export function CrmKanban({ initialRecords }: Props) {
                               {...prov.dragHandleProps}
                               onClick={() => setSelected(rec)}
                               className={cn(
-                                "bg-white dark:bg-[#0f2419] rounded-xl p-3 border cursor-pointer group transition-all",
+                                "rounded-xl p-3 border cursor-pointer group transition-all relative",
+                                isTaken(rec)
+                                  ? "bg-gray-100 dark:bg-gray-800/60 border-gray-200 dark:border-white/5 opacity-70"
+                                  : "bg-white dark:bg-[#0f2419]",
                                 snap.isDragging
                                   ? "shadow-xl rotate-1 border-[#E6C16A]"
-                                  : "border-gray-100 dark:border-white/8 hover:border-[#E6C16A]/40 hover:shadow-md"
+                                  : !isTaken(rec) && "border-gray-100 dark:border-white/8 hover:border-[#E6C16A]/40 hover:shadow-md"
                               )}
                             >
                               <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight mb-1">
@@ -150,7 +188,15 @@ export function CrmKanban({ initialRecords }: Props) {
                               </div>
 
                               {rec.lead.city && (
-                                <div className="text-gray-400 dark:text-white/30 text-xs mb-2">{rec.lead.city}</div>
+                                <div className="text-gray-400 dark:text-white/30 text-xs mb-1">{rec.lead.city}</div>
+                              )}
+                              {rec.assigned && (
+                                <div className={cn(
+                                  "text-xs font-semibold mb-1 flex items-center gap-1",
+                                  isTaken(rec) ? "text-gray-400" : "text-[#2E7D68] dark:text-[#E6C16A]"
+                                )}>
+                                  {isTaken(rec) ? "🔒" : "👤"} {rec.assigned.name}
+                                </div>
                               )}
 
                               <div className="flex items-center justify-between">
@@ -314,22 +360,32 @@ export function CrmKanban({ initialRecords }: Props) {
                 </div>
               )}
 
-              {/* Notes */}
+              {/* Activity Log / Notes */}
               <div>
-                <label className="text-xs font-bold text-gray-500 dark:text-white/50 uppercase tracking-wider mb-2 block">
-                  <MessageSquare size={12} className="inline mr-1" /> Notes
-                </label>
-                <div className="space-y-2 mb-3 max-h-40 overflow-y-auto">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-gray-500 dark:text-white/50 uppercase tracking-wider">
+                    <MessageSquare size={12} className="inline mr-1" /> Activity Log
+                  </label>
+                  <span className="text-xs text-gray-400 dark:text-white/30">{selected.notes.length} entries</span>
+                </div>
+                <div className="space-y-0 mb-3 max-h-52 overflow-y-auto relative">
                   {selected.notes.length === 0 ? (
-                    <p className="text-gray-300 dark:text-white/20 text-xs">No notes yet</p>
-                  ) : selected.notes.map(n => (
-                    <div key={n.id} className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 text-xs text-gray-700 dark:text-white/70">
-                      {n.content}
-                      <div className="text-gray-300 dark:text-white/20 mt-1">
-                        {new Date(n.createdAt).toLocaleDateString()}
-                      </div>
+                    <p className="text-gray-300 dark:text-white/20 text-xs py-3">No activity yet</p>
+                  ) : (
+                    <div className="relative pl-4 border-l-2 border-[#1B5E4B]/20 dark:border-[#E6C16A]/20 space-y-3">
+                      {[...selected.notes].reverse().map(n => (
+                        <div key={n.id} className="relative">
+                          <div className="absolute -left-5 top-1.5 w-2.5 h-2.5 rounded-full bg-[#1B5E4B] dark:bg-[#E6C16A]" />
+                          <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-2.5 text-xs text-gray-700 dark:text-white/70">
+                            {n.content}
+                          </div>
+                          <div className="text-gray-300 dark:text-white/20 text-xs mt-0.5 pl-1">
+                            {new Date(n.createdAt).toLocaleString("ar-SA", { dateStyle: "short", timeStyle: "short" })}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
                 <div className="flex gap-2">
                   <input

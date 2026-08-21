@@ -16,13 +16,6 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
       where,
       orderBy: { priorityScore: "desc" },
       take:    100,
-      select: {
-        id: true, businessName: true, category: true, city: true,
-        phone: true, website: true, websiteStatus: true,
-        rating: true, reviewCount: true, priority: true,
-        priorityScore: true, presaleInfo: true, pipelineStage: true,
-        googleMapsUrl: true,
-      },
     }),
     prisma.lead.findMany({
       distinct: ["city"],
@@ -63,7 +56,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
       </div>
 
       <LeadsTable
-        leads={leads}
+        leads={leads as any}
         cities={cities.map(c => c.city!).filter(Boolean)}
         filters={searchParams}
       />
