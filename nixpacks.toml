@@ -2,7 +2,7 @@
 nixPkgs = ["nodejs_22", "npm-10_x", "openssl"]
 
 [phases.install]
-cmds = ["npm install --legacy-peer-deps || (echo '=== NPM DEBUG LOG ===' && cat /root/.npm/_logs/*.log 2>/dev/null | tail -80 && exit 1)"]
+cmds = ["node -e \"const fs=require('fs');const l=JSON.parse(fs.readFileSync('package-lock.json'));for(const k of Object.keys(l.packages)){const p=l.packages[k];if(!p.version&&!p.resolved&&!p.link)delete l.packages[k];}fs.writeFileSync('package-lock.json',JSON.stringify(l));\" && npm install --legacy-peer-deps"]
 
 [phases.build]
 cmds = ["npx prisma generate", "npm run build"]
