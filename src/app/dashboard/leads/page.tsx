@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import { LeadsTable } from "@/components/dashboard/LeadsTable";
 import { AddLeadButton } from "@/components/dashboard/AddLeadButton";
